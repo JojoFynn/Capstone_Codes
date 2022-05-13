@@ -1,3 +1,4 @@
+// RFID MFRC522 / RC522 Library : https://github.com/miguelbalboa/rfid
 #include <SPI.h>
 #include <MFRC522.h>
 #include <ESP8266WiFi.h>
@@ -55,7 +56,7 @@ void loop() {
     //Post Data
     postData = "http://172.20.10.2:5000/getrfidcode?UIDresult=" + UIDresultSend;
     
-    http.begin(wifiClient,postData);  //Specify request destination
+    http.begin(wifiClient,postData);  // This is the request destination. The rfid unique identifier will be sent to getrfid_route
     http.addHeader("Content-Type", "application/x-www-form-urlencoded"); //Specify content-type header
     
     
