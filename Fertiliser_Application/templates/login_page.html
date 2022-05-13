@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='login_page_style.css') }}" type="text/css">
+    <title>Login Page</title>
+</head>
+
+<body>
+    <div class="container">
+        <center>
+            <div class="circle">
+                <img src="{{url_for('static', filename='avatar.png')}}" alt="turntabl"
+                    style="width: 200px; height: 200px;">
+            </div><br><br>
+            <center>
+                <h3>ADMINISTRATOR</h3>
+            </center>
+            <form action='{{url_for("login_authentication")}}' method="POST">
+                <input type="text" name="name" id="name" placeholder="Enter Your Name"><br>
+                <input type="password" name="password" id="password" placeholder="password"><br>
+                <button type="submit">LOGIN </button>
+            </form><br>
+        </center><br>
+    </div>
+</body>
+
+</html>

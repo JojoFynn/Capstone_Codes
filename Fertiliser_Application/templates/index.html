@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block body %}
+<h3 class='text-center text-muted mb-3'>HOMEPAGE FOR FERTILISER SCANNING APPLICATION</h3>
+<p class='text-right'><a href='{{url_for("fertiliser_information")}}' class='btn btn-success '>+ADD A NEW BAG</a></p>
+<p class='text-left'><a href='{{url_for("checkoutbag")}}' class='btn btn-success '>CHECKOUT BAGS</a></p>
+<p class='text-center'><a href='{{url_for("login_authentication")}}' class='btn btn-success '>LOGOUT</a></p>
+<table class='table table-bordered'>
+    <thead>
+        <th>Tag Code</th>
+        <th>Manufacturer Name </th>
+        <th>Start Location</th>
+        <th>Destination</th>
+        <th>Voucher Code</th>
+    </thead>
+    <tbody>
+        {% for row in datas %}
+        <tr>
+            <td>{{row.rfid_code}}</td>
+            <td>{{row.manufacturer_name}}</td>
+            <td>{{row.start_location}}</td>
+            <td>{{row.destination_location}}</td>
+            <td>{{row.voucher_code}}</td>
+            <td><a href='{{url_for("edit_user",rfid_code=row.rfid_code)}}' class='btn btn-primary'>Edit</a></td>
+            <td><a href='{{url_for("delete_user",rfid_code=row.rfid_code)}}' class='btn btn-danger'
+                    onclick='return confirm("Are You Sure")'>Delete</a></td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='editing_fertiliser_style.css') }}">
+
+</head>
+
+<body>
+    <h3 align="center" id="blink">Please Scan Your RFID Tag </h3>
+
+    <div class="wrapper" id="rfidwork">
+        <h2>Adding Fertiliser Information</h2>
+        <form method="POST" action='{{url_for("fertiliser_information")}}' id="addForm">
+            <div class="input-box">
+                <input type="text" id="Name_of_Manufacturer" name="Name_of_Manufacturer"
+                    placeholder="Name of Manufacturer" required>
+            </div>
+            <div class="input-box">
+                <input type="text" id="Manufacturer_Location Name" name="Manufacturer_Location_Name"
+                    placeholder="Manufacturer' s Location Name" required>
+            </div>
+            <div class="input-box">
+                <input type="text" id="Destination_Location_Name" name="Destination_Location_Name"
+                    placeholder="Destination_Location_Name" required>
+            </div>
+            <div class="input-box">
+                <input type="text" id="Unique_Identifier_Tag_Code" name="Unique_Identifier_Tag_Code"
+                    placeholder="Unique_Identifier_Tag_Code" required>
+            </div>
+            <div class="input-box">
+                <input type="text" id="Unique_Government_Voucher_Code" name="Unique_Government_Voucher_Code"
+                    placeholder="Unique Government Voucher Code" required>
+            </div>
+            <div class="input-box button">
+                <input type="Submit" value="ADDED NEW FERTILISER INFORMATION">
+            </div>
+        </form>
+    </div>
+
+    <button class='text-right'><a href='{{url_for("index")}}' class='btn btn-warning '>Return to Homepage</a></button>
+
+</body>
+<script>
+    const uidInput = $('#Unique_Identifier_Tag_Code');
+    $('#addForm').ready(function () {
+        console.log('form loaded')
+        const timer = setInterval(getUID, 500);
+    });
+
+    function getUID() {
+        fetch("/getrfidcode", { method: 'GET' })
+            .then(res => res.text())
+            .then(data => uidInput.val(data))
+            .catch(err => console.log(err))
+    }
+</script>
+
+</html>
+{% endblock %}
